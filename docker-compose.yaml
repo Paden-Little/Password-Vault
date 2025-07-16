@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  db:
+    build:
+      context: ./db
+    container_name: sql_server
+    environment:
+      SA_PASSWORD: ${SQL_PASSWORD}
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+
+  api:
+    build:
+      context: ./api
+    container_name: dotnet_api
+    ports:
+      - "8080:80"
+    expose:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  ui:
+    build: ./ui
+    ports:
+      - "3000:4200"
+    depends_on:
+      - api
+
+
+volumes:
+  sqlserverdata:

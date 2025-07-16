@@ -1,5 +1,8 @@
+.env
+/api/bin
+/api/obj
+/ui/node_modules
+.vscode
+=======
 # Environments
 .env
-
-#IDE
-.idea
