@@ -1,0 +1,6 @@
+.env
+/api/bin
+/api/obj
+/ui/node_modules
+.vscode
+.idea
