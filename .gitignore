@@ -3,4 +3,6 @@
 /api/obj
 /ui/node_modules
 .vscode
-.idea
+=======
+# Environments
+.env
