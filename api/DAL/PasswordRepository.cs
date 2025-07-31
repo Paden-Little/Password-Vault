@@ -15,9 +15,6 @@ namespace SmwHackTracker.api.DAL
             _context = context;
         }
 
-        /// <summary>
-        /// Create a new password entry
-        /// </summary>
         public async Task<Guid> CreatePasswordAsync(Password password)
         {
             password.Id = Guid.NewGuid();
@@ -33,9 +30,6 @@ namespace SmwHackTracker.api.DAL
             return password.Id;
         }
 
-        /// <summary>
-        /// Get all password entries for a specific user
-        /// </summary>
         public async Task<IEnumerable<Password>> GetAllPasswordsAsync(Guid userId)
         {
             var sql = @"
@@ -48,9 +42,6 @@ namespace SmwHackTracker.api.DAL
             return await connection.QueryAsync<Password>(sql, new { UserId = userId });
         }
 
-        /// <summary>
-        /// Get a specific password entry by ID
-        /// </summary>
         public async Task<Password?> GetPasswordByIdAsync(Guid passwordId, Guid userId)
         {
             var sql = @"
@@ -62,9 +53,6 @@ namespace SmwHackTracker.api.DAL
             return await connection.QueryFirstOrDefaultAsync<Password>(sql, new { PasswordId = passwordId, UserId = userId });
         }
 
-        /// <summary>
-        /// Update an existing password entry
-        /// </summary>
         public async Task<bool> UpdatePasswordAsync(Password password)
         {
             password.UpdatedAt = DateTime.UtcNow;
@@ -80,9 +68,6 @@ namespace SmwHackTracker.api.DAL
             return rowsAffected > 0;
         }
 
-        /// <summary>
-        /// Delete a password entry
-        /// </summary>
         public async Task<bool> DeletePasswordAsync(Guid passwordId, Guid userId)
         {
             var sql = @"DELETE FROM Passwords WHERE Id = @PasswordId AND UserId = @UserId";
@@ -92,9 +77,7 @@ namespace SmwHackTracker.api.DAL
             return rowsAffected > 0;
         }
 
-        /// <summary>
-        /// Search password entries by platform or username
-        /// </summary>
+
         public async Task<IEnumerable<Password>> SearchPasswordsAsync(Guid userId, string searchTerm)
         {
             var sql = @"
@@ -111,9 +94,6 @@ namespace SmwHackTracker.api.DAL
             });
         }
 
-        /// <summary>
-        /// Get password count for a user
-        /// </summary>
         public async Task<int> GetPasswordCountAsync(Guid userId)
         {
             var sql = @"SELECT COUNT(*) FROM Passwords WHERE UserId = @UserId";

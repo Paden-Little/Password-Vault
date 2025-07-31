@@ -1,4 +1,3 @@
--- Create the database
 IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'smw_hack_tracker')
 BEGIN
     CREATE DATABASE smw_hack_tracker;
@@ -8,7 +7,6 @@ GO
 USE smw_hack_tracker;
 GO
 
--- Users table for authentication
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Users' AND xtype='U')
 BEGIN
     CREATE TABLE Users (
@@ -25,7 +23,6 @@ BEGIN
 END
 GO
 
--- Passwords table for the password vault
 IF NOT EXISTS (SELECT * FROM sysobjects WHERE name='Passwords' AND xtype='U')
 BEGIN
     CREATE TABLE Passwords (
@@ -46,7 +43,6 @@ BEGIN
 END
 GO
 
--- Create trigger to update UpdatedAt column automatically
 IF NOT EXISTS (SELECT * FROM sys.triggers WHERE name = 'TR_Users_UpdatedAt')
 BEGIN
     EXEC('
@@ -83,8 +79,7 @@ BEGIN
 END
 GO
 
--- Insert sample data for testing (optional)
--- Note: In production, users would register through the API
+-- Testing data for testing runs
 IF NOT EXISTS (SELECT * FROM Users WHERE Username = 'testuser')
 BEGIN
     INSERT INTO Users (Id, Username, Email, Password) VALUES 
@@ -92,8 +87,7 @@ BEGIN
 END
 GO
 
--- Sample encrypted password entries (these would be created through the API)
--- These are just examples - real entries would have properly encrypted passwords
+-- More testing rows
 IF NOT EXISTS (SELECT * FROM Passwords WHERE Platform = 'Gmail' AND UserId = '550e8400-e29b-41d4-a716-446655440000')
 BEGIN
     INSERT INTO Passwords (Id, Platform, Username, EncryptedPassword, Comment, UserId) VALUES 
