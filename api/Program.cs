@@ -1,10 +1,42 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using SmwHackTracker.api.DAL;
 
-//Expose to outside the container
-builder.WebHost.UseUrls("http://0.0.0.0:80");
+namespace SmwHackTracker.api
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-var app = builder.Build();
+            builder.WebHost.UseUrls("http://0.0.0.0:80");
 
-app.MapGet("/", () => "Hello from .NET API!");
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
+            });
 
-app.Run();
+            builder.Services.AddSingleton<DapperContext>();
+            builder.Services.AddScoped<UserRepository>();
+            builder.Services.AddScoped<PasswordRepository>();
+
+            var app = builder.Build();
+
+            app.UseCors();
+
+            app.MapGet("/", () => "Hello from .NET API!");
+
+            app.MapAuthEndpoints();
+            app.MapPasswordEndpoints();
+
+            app.Run();
+        }
+    }
+}
