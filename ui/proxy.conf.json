@@ -1,0 +1,7 @@
+{
+    "/auth": {
+      "target": "http://dotnet_api:80",
+      "secure": false,
+      "changeOrigin": true
+    }
+}
