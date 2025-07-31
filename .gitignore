@@ -5,3 +5,6 @@
 .vscode
 .idea
 api/appsettings.json
+
+api.Tests/bin
+api.Tests/obj
