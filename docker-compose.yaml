@@ -12,6 +12,8 @@ services:
       - "1433:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
+    networks:
+      - backend
 
   api:
     build:
@@ -20,9 +22,11 @@ services:
     ports:
       - "8080:80"
     expose:
-      - "8080:8080"
+      - "80"
     depends_on:
       - db
+    networks:
+      - backend
 
   ui:
     build: ./ui
@@ -30,7 +34,12 @@ services:
       - "3000:4200"
     depends_on:
       - api
-
+    networks:
+      - backend
 
 volumes:
   sqlserverdata:
+
+networks:
+  backend:
+    driver: bridge
