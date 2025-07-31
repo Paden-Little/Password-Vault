@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {Component, EventEmitter, inject, Output} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {AuthService} from '../../services/auth';
+import {LoginRequest} from '../../services/auth';
 
 @Component({
   selector: 'app-login-modal',
@@ -7,19 +9,27 @@ import {FormsModule} from '@angular/forms';
   imports: [
     FormsModule
   ],
-  styleUrls: ['./login-modal.css']
+  styleUrls: ['./login-modal.css'],
+  providers: [AuthService]
 })
 export class LoginModal {
   email = '';
   password = '';
-
+  auth = inject(AuthService);
   @Output() closeModal = new EventEmitter<void>();
 
   login() {
-    // Replace with real auth logic
-    console.log('Logging in:', { email: this.email, password: this.password });
-    this.close();
+    this.auth.login({ email: this.email, password: this.password }).subscribe({
+      next: (res) => {
+        console.log('Logged in:', res);
+        this.close();
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+      }
+    });
   }
+
 
   close() {
     this.closeModal.emit();

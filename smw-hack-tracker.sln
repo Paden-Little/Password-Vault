@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smwapi.Tests", "api.Tests\smwapi.Tests.csproj", "{D3EBC187-A793-015E-F26A-0E4CD4489818}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smwapi", "api\smwapi.csproj", "{707317F3-3085-F4D8-CA7E-2DF12DCAB44D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3EBC187-A793-015E-F26A-0E4CD4489818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3EBC187-A793-015E-F26A-0E4CD4489818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3EBC187-A793-015E-F26A-0E4CD4489818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3EBC187-A793-015E-F26A-0E4CD4489818}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707317F3-3085-F4D8-CA7E-2DF12DCAB44D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707317F3-3085-F4D8-CA7E-2DF12DCAB44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707317F3-3085-F4D8-CA7E-2DF12DCAB44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707317F3-3085-F4D8-CA7E-2DF12DCAB44D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {64F95A97-70DB-4E1F-A884-12DA9071F9EA}
+	EndGlobalSection
+EndGlobal

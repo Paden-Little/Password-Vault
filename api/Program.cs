@@ -17,9 +17,9 @@ namespace SmwHackTracker.api
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.AllowAnyOrigin()
-                          .AllowAnyMethod()
-                          .AllowAnyHeader();
+                    policy.WithOrigins("http://localhost:3000")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
                 });
             });
 
@@ -37,6 +37,7 @@ namespace SmwHackTracker.api
             app.MapPasswordEndpoints();
 
             app.Run();
+
         }
     }
 }

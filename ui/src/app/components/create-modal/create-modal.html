@@ -1,0 +1,40 @@
+<div class="modal-overlay" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <h2 class="modal-title">Create Account</h2>
+    <form (ngSubmit)="createAccount()" #createForm="ngForm">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          required
+          [(ngModel)]="username"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          required
+          [(ngModel)]="email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          required
+          [(ngModel)]="password"
+        />
+      </div>
+      <div class="modal-actions">
+        <button type="submit" [disabled]="!createForm.valid">Create Account</button>
+      </div>
+    </form>
+  </div>
+</div>

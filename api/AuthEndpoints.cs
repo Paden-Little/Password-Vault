@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
 using System.Text.Json;
 using System.Security.Cryptography;
 using System.Text;
@@ -48,6 +45,8 @@ public static class AuthEndpoints
                 await context.Response.WriteAsync("Invalid request");
                 return;
             }
+
+            Console.WriteLine(request.ToString());
 
             if (!Regex.IsMatch(request.Password, "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$"))
             {
