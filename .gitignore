@@ -3,6 +3,5 @@
 /api/obj
 /ui/node_modules
 .vscode
-=======
-# Environments
-.env
+.idea
+api/appsettings.json
