@@ -1,14 +1,17 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmwHackTracker.api.DAL;
+using dotenv.net;
 
 namespace SmwHackTracker.api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
+
             var builder = WebApplication.CreateBuilder(args);
 
             builder.WebHost.UseUrls("http://0.0.0.0:80");
@@ -26,6 +29,8 @@ namespace SmwHackTracker.api
             builder.Services.AddSingleton<DapperContext>();
             builder.Services.AddScoped<UserRepository>();
             builder.Services.AddScoped<PasswordRepository>();
+            builder.Services.AddSingleton<EmailService>();
+
 
             var app = builder.Build();
 
@@ -36,8 +41,12 @@ namespace SmwHackTracker.api
             app.MapAuthEndpoints();
             app.MapPasswordEndpoints();
 
-            app.Run();
 
+            EmailService email = new EmailService();
+            await email.SendEmailAsync("little.paden@gmail.com", "Subject test", "body test");
+
+
+            app.Run();
         }
     }
 }
